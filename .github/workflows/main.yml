@@ -8,7 +8,13 @@ jobs:
         name: Build
         runs-on: ubuntu-latest
         steps:
-            - uses: actions/checkout@master
-            - uses: actions/setup-node@v1
-            - uses: npm install
-            - uses: npm run deploy
+            - name: Checkout at master
+              uses: actions/checkout@master
+            - name: Setup NodeJs
+              uses: actions/setup-node@master
+              with:
+                node-version: 10.0.0
+            - run: npm install
+            - run: npm run deploy
+            env:
+                NODE_AUTH_TOKEN: ${{secrets.GITHUB_TOKEN}}
