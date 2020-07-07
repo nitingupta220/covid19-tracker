@@ -1,26 +1,26 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, { Component } from "react";
+import "./App.css";
+import { connect } from "react-redux";
+import BlockContainer from "./components/BlockContainer";
+import SelectContainer from "./components/SelectContainer";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends Component {
+  render() {
+    const { title } = this.props;
+    return (
+      <div className="App">
+        <h1>{title}</h1>
+        <BlockContainer />
+        <br />
+        <SelectContainer />
+      </div>
+    );
+  }
 }
+const mapStateToProps = (state) => ({
+  title: state.title,
+  allDetails: state.allDetails,
+  countryData: state.countryData,
+});
 
-export default App;
+export default connect(mapStateToProps)(App);
